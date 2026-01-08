@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Arial;
+  background: url('https://mundopan.es/wp-content/uploads/2015/10/tipos-de-barras-de-pan.jpg') no-repeat center center fixed;
+  background-size: cover;
+  padding: 40px;
+  color: #333;
+}
