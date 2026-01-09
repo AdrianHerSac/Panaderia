@@ -1,0 +1,63 @@
+<div class="header">
+  <h1>Panadería</h1>
+</div>
+
+<div class="company-info">
+  <div class="logo">
+    <img src="assets/Logo.png" alt="Logo" />
+  </div>
+  <div>
+    <p><strong>Panadería Somos la Masa</strong></p>
+    <p>C/Manacor Nº24</p>
+    <p>28916 Madrid</p>
+    <p>Teléfono: 91 696 66 66</p>
+  </div>
+</div>
+
+<div class="form-row">
+  <label>Producto:</label>
+  <select [(ngModel)]="productoSeleccionado" (change)="actualizarPrecio()">
+    <option value="">-- Seleccionar --</option>
+    <option *ngFor="let p of productos" [value]="p.nombre">{{p.nombre}}</option>
+  </select>
+
+  <label>Precio:</label>
+  <input type="text" [value]="precioActual + ' €'" readonly style="width: 60px" />
+
+  <label>Cantidad:</label>
+  <input type="number" [(ngModel)]="cantidadActual" min="1" style="width: 60px" />
+
+  <label>Total:</label>
+  <input type="text" [value]="(precioActual * cantidadActual).toFixed(2) + ' €'" readonly style="width: 80px" />
+
+  <button class="btn" (click)="agregarLinea()">+</button>
+  <button class="btn" (click)="imprimirTicket()">Imprimir</button>
+</div>
+
+<table>
+  <thead>
+  <tr>
+    <th>Producto</th>
+    <th>Precio u.</th>
+    <th>Cantidad</th>
+    <th>Total</th>
+    <th>Borrar</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let linea of lineasPedido; let i = index">
+    <td>{{linea.producto}}</td>
+    <td>{{linea.precio | number:'1.2-2'}} €</td>
+    <td>{{linea.cantidad}}</td>
+    <td>{{linea.subtotal | number:'1.2-2'}} €</td>
+    <td><button class="btn delete-btn" (click)="borrarLinea(i)">X</button></td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr class="total-row">
+    <td colspan="3" style="text-align: right">TOTAL:</td>
+    <td>{{totalTicket | number:'1.2-2'}} €</td>
+    <td></td>
+  </tr>
+  </tfoot>
+</table>
